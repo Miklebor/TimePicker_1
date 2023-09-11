@@ -9,8 +9,8 @@
 
     <EditText
         android:id="@+id/editTextTime"
-        android:layout_width="208dp"
-        android:layout_height="73dp"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
         android:ems="10"
         android:inputType="time"
         android:text=""
@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67"
+        app:layout_constraintVertical_bias="0.338"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
@@ -34,33 +34,63 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.873" />
+        app:layout_constraintVertical_bias="0.601" />
+
+    <Button
+        android:id="@+id/btSelectDate"
+        android:layout_width="170dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:text="Установите дату"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.74" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="170dp"
+        android:layout_width="250dp"
         android:layout_height="75dp"
         android:layout_marginStart="173dp"
         android:layout_marginEnd="173dp"
-        android:layout_marginBottom="216dp"
+        android:layout_marginBottom="844dp"
+        android:text="@string/textView"
         android:textAlignment="center"
         android:textSize="24sp"
         android:visibility="visible"
-        android:text="@string/textView"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTime"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextClock
         android:id="@+id/textClock"
         android:layout_width="200dp"
         android:layout_height="100dp"
+        android:format24Hour="dd.MM.yyyy HH:mm:ss"
         android:textAlignment="center"
         android:textSize="24sp"
-        android:format24Hour="dd.MM.yyyy hh:mm:ss a"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.167" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:ems="24"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.445" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
