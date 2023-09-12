@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val dateSelBt = findViewById<Button>(R.id.btSelectDate)
         val timeSelBt = findViewById<Button>(R.id.btSelectTime)
         //val txtClock = findViewById<TextClock>(R.id.textClock)
-        val txtView = findViewById<TextView>(R.id.textView)
+        //val txtView = findViewById<TextView>(R.id.textView)
         //val timeClk = findViewById<TextClock>(R.id.textClock)
 
                 timeSelBt.setOnClickListener {
