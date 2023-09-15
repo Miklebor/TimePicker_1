@@ -4,17 +4,17 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.icu.text.DecimalFormat
-import android.icu.text.NumberFormat
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextClock
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import java.util.Calendar
+import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 
 //@Suppress("NAME_SHADOWING")
 class MainActivity : AppCompatActivity() {
@@ -30,30 +30,58 @@ class MainActivity : AppCompatActivity() {
         //val txtView4 = findViewById<TextView>(R.id.textView4)
         //val txtClock = findViewById<TextClock>(R.id.textClock)
         //val timeClk = findViewById<TextClock>(R.id.textClock)
-        timeSelBt.setOnClickListener { randomTimePicker() }
-        dateSelBt.setOnClickListener { datePickerDialog() }
-        //tTE.addTextChangedListener() { cntDownTimer1() }
 
+        timeSelBt.setOnClickListener { randomTimePicker() }
+        //dateSelBt.setOnClickListener { datePickerDialog() }
+        tTE.addTextChangedListener() { cntDownTimer1() }
+        //dateSelBt.setOnClickListener { myPeriod() }
+
+    }
+
+
+
+    fun myPeriod() {
+        val date1 = System.currentTimeMillis()
+        Thread.sleep(10000)
+        val date2 = System.currentTimeMillis()
+        val txtView4 = findViewById<TextView>(R.id.textView4)
+        val duration = abs(date2 - date1)
+        val days = TimeUnit.MILLISECONDS.toDays(duration)
+        val hours = TimeUnit.MILLISECONDS.toHours(duration)
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(duration)
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(duration)
+
+        txtView4.setText("Seconds between $date1 and $date2: $seconds");
+        println("Days between $date1 and $date2: $days")
+        //println("Days between $date1 and $date2: $days")
+        println("Hours between $date1 and $date2: $hours")
+        println("Minutes between $date1 and $date2: $minutes")
+        println("Seconds between $date1 and $date2: $seconds")
     }
 
     private fun cntDownTimer1() {
         val txtView4 = findViewById<TextView>(R.id.textView4)
+        var month: Long = 0
+        var day: Long = 0
         var hour: Long = 0
         var min: Long = 0
-        var sec: Long = 33
-        object : CountDownTimer(50000, 1000) {
-            @SuppressLint("SetTextI18n")
+        var sec: Long = 1100000000000  // нормально пересчитывается в счетчик подствляется
+        object : CountDownTimer((sec), 1000) {
+        @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
                 // Used for formatting digit to be in 2 digits only
                 val f = DecimalFormat("00"); //NumberFormat
+                month = (millisUntilFinished / 1296000000) % 30;
+                day = (millisUntilFinished / 108000000) % 30;
                 hour = (millisUntilFinished / 3600000) % 24;
                 min = (millisUntilFinished / 60000) % 60;
                 sec = (millisUntilFinished / 1000) % 60;
-                txtView4.setText(f.format(hour) + ":" + f.format(min) + ":" + f.format(sec));
+                txtView4.setText(f.format(month) + ":" + f.format(day) + ":" + f.format(hour) + ":" + f.format(min) + ":" + f.format(sec));
             }
+
             @SuppressLint("SetTextI18n")
             override fun onFinish() {
-                txtView4.setText("00:00:00");
+                txtView4.setText("Ура");
             }
         }.start();
     }
@@ -82,10 +110,8 @@ class MainActivity : AppCompatActivity() {
         val minute = c.get(Calendar.MINUTE)
         val tTE = findViewById<EditText>(R.id.editTextTime)
 
-        val tpd = TimePickerDialog(this,TimePickerDialog.OnTimeSetListener(function = { view, h, m  ->
-            /*Toast.makeText(this, h.toString() + " : " + m , Toast.LENGTH_LONG).show()*/
-            tTE.setText(f.format(h) + ":" + f.format(m))
-        }),hour,minute, true)
+        val tpd = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener(function = { view, h, m  ->
+            tTE.setText(f.format(h) + ":" + f.format(m))}), hour, minute, true)
         tpd.show()
     }
     @SuppressLint("SetTextI18n")
@@ -129,4 +155,5 @@ class MainActivity : AppCompatActivity() {
 }
 /*Toast.makeText(this, """$dayOfMonth - ${monthOfYear + 1} - $year""", Toast.LENGTH_LONG).show() */
 //dateTextEd.setText("")
+/*Toast.makeText(this, h.toString() + " : " + m , Toast.LENGTH_LONG).show()*/
 /*Toast.makeText(this, h.toString() + " : " + m , Toast.LENGTH_LONG).show()*/
